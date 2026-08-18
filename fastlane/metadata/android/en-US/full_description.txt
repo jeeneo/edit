@@ -1,0 +1,10 @@
+Not your above-average advanced photo editor, it's pretty basic.
+
+1. Crop/rotate/mirror/flip (lossless¹)
+2. Draw/Add text
+3. "Stickers"
+4. Adjust (invert, saturation, hue, etc)
+5. Overwrite
+6. Metadata/exif supported
+
+Supports Android 6+

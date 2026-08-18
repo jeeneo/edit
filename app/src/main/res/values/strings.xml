@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Edit</string>
+
+    <string name="stickers_category_shapes">shapes</string>
+    <string name="stickers_vector_stop_sign">stop sign</string>
+    <string name="stickers_vector_warning_sign">warning sign</string>
+
+    <string name="stickers_vector_arrow">arrow</string>
+    <string name="stickers_vector_circle">circle</string>
+    <string name="stickers_vector_decagon">decagon</string>
+    <string name="stickers_vector_heptagon">heptagon</string>
+    <string name="stickers_vector_nonagon">nonagon</string>
+    <string name="stickers_vector_octogon">octogon</string>
+    <string name="stickers_vector_square">square</string>
+    <string name="stickers_vector_star">star</string>
+    <string name="stickers_vector_triangle">triangle</string>
+    <string name="stickers_custom_sticker">custom</string>
+
+</resources>
