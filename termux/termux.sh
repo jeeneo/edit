@@ -99,17 +99,17 @@ pkg install $packages -y &> /dev/null
 # === NDK ===
 
 # https://github.com/lzhiyong/termux-ndk
-if [ ! -f "./ndk.7z" ]; then
+if [ ! -f "./ndk.tar.xz" ]; then
     echo "downloading NDK"
-    curl --progress-bar -L -o ndk.7z https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r29-aarch64.tar.xz
+    curl --progress-bar -L -o ndk.tar.xz https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r29-aarch64.tar.xz
     echo "extracting NDK"
     mkdir -p "$HOME/.installtemp/ndk"
-    bsdtar -C "$HOME/.installtemp/ndk" -xf ndk.7z
-    rm ndk.7z
+    bsdtar -C "$HOME/.installtemp/ndk" -xf ndk.tar.xz
+    rm ndk.tar.xz
 else
     echo "extracting NDK"
     mkdir -p "$HOME/.installtemp/ndk"
-    bsdtar -C "$HOME/.installtemp/ndk" -xf ndk.7z
+    bsdtar -C "$HOME/.installtemp/ndk" -xf ndk.tar.xz
 fi
 
 mkdir -p "$ANDROID_HOME/ndk"

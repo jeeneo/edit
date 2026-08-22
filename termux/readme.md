@@ -12,7 +12,7 @@ visit https://developer.android.com/studio, scroll down to `Command line tools o
 Then download files:
 
 - [android-build-tools-36.1.0-1.fc44.aarch64.rpm](https://download.copr.fedorainfracloud.org/results/curtisy/android-build-tools/fedora-44-aarch64/Packages/a/android-build-tools-36.1.0-1.fc44.aarch64.rpm)
-- [android-ndk-r29-aarch64.7z](https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r29-aarch64.7z)
+- [android-ndk-r29-aarch64.tar.xz](https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r29-aarch64.tar.xz)
 
 and rename to `commandlinetools.zip`, `android-build-tools.rpm`, `ndk.7z` respectively
 
