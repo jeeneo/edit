@@ -155,7 +155,7 @@ fun DialButton(
                     detectTapGestures(onDoubleTap = {
                         scope.launch {
                             isDragging = true
-                            HapticPatterns.longPress()
+                            // HapticPatterns.longPress()
                             currentOnValue(defaultValue)
                             rotAnim.animateTo(valueToRot(defaultValue), bouncySpring)
                             isDragging = false

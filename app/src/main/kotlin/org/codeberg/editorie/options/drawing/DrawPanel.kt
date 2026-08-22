@@ -8,6 +8,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +18,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,6 +42,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -49,6 +51,7 @@ import org.codeberg.editorie.data.HapticPatterns
 import org.codeberg.editorie.ui.ColorPickerBar
 import org.codeberg.editorie.ui.bottombar.RedoIconButton
 import org.codeberg.editorie.ui.bottombar.UndoIconButton
+import org.codeberg.editorie.util.AppToasts
 
 @Composable
 fun DrawOptions(
@@ -64,6 +67,8 @@ fun DrawOptions(
     onSetUndoLevels: (Int) -> Unit,
     currentUndoLevels: Int,
     hasStrokes: Boolean,
+    eyedropperAutoSwitch: Boolean,
+    onToggleEyedropperAutoSwitch: (Boolean) -> Unit,
     onSizePreviewChange: (Boolean) -> Unit,
 ) {
     Column(
@@ -99,7 +104,14 @@ fun DrawOptions(
             //noinspection MissingHapticFeedback
             OptionIconButton(
                 selected = drawState.tool is DrawTool.Eyedropper,
-                onClick = { onDrawStateChange(drawState.copy(tool = DrawTool.Eyedropper)) }) {
+                onClick = { onDrawStateChange(drawState.copy(tool = DrawTool.Eyedropper)) },
+                onLongClick = {
+                    val next = !eyedropperAutoSwitch
+                    onToggleEyedropperAutoSwitch(next)
+                    AppToasts.show(
+                        if (next) "Switch to previous tool" else "Stay on eyedropper"
+                    )
+                }) {
                 Icon(
                     if (drawState.tool == DrawTool.Eyedropper) Icons.Filled.Colorize else Icons.Outlined.Colorize,
                     "Eyedropper"
@@ -190,14 +202,23 @@ fun DrawOptions(
 fun OptionIconButton(
     selected: Boolean,
     onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
     icon: @Composable () -> Unit,
 ) {
-    Surface(
-        onClick = { HapticPatterns.tap(); onClick() },
-        shape = MaterialTheme.shapes.small,
-        color = if (selected) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent,
-        modifier = Modifier.size(40.dp),
-    ) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { icon() }
-    }
+    val interactionSource = remember { MutableInteractionSource() }
+    Box(
+        modifier = Modifier
+            .size(40.dp)
+            .clip(MaterialTheme.shapes.small)
+            .background(
+                if (selected) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent
+            )
+            .combinedClickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = { HapticPatterns.tap(); onClick() },
+                onLongClick = onLongClick?.let { action -> { action() } },
+            ),
+        contentAlignment = Alignment.Center,
+    ) { icon() }
 }

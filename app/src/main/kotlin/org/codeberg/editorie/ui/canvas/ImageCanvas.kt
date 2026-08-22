@@ -264,7 +264,13 @@ fun ImageCanvas(
                         background = colorScheme.background,
                     ) {
                         drawTransparencyMap(viewport, checkerPaint)
-                        drawAllLayers(renderCtx, overlay, display.panel, pendingPoints.points)
+                        withTransform({
+                            translate(viewport.pan.x, viewport.pan.y); scale(
+                            viewport.zoom, viewport.zoom, Offset.Zero
+                        )
+                        }) {
+                            drawAllLayers(renderCtx, overlay, display.panel, pendingPoints.points)
+                        }
                     }
                 }
             }

@@ -45,7 +45,7 @@ fun Modifier.drawToolGestures(
             pendingPoints.points = listOf(viewport.toPixel(it))
         }, onDrag = { change, _ ->
             change.consume()
-            pendingPoints.points = pendingPoints.points + viewport.toPixel(change.position)
+            pendingPoints.points += viewport.toPixel(change.position)
         }, onDragEnd = {
             onStrokeEnd(pendingPoints.points, viewport.screenToPixelWidth(penWidth))
             pendingPoints.points = emptyList()

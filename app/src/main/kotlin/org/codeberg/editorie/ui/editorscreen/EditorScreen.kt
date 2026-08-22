@@ -334,6 +334,7 @@ fun EditorScreen(incomingIntent: Intent, viewModel: EditorScreenViewModel = view
                     onModeChange = viewModel::setMode,
                     closeOnSave = closeOnSave.value,
                     onToggleCloseOnSave = { closeOnSave.value = it; App.prefs.saveCloseOnSave(it) },
+                    onToggleEyedropperAutoSwitch = viewModel::setEyedropperAutoSwitch,
                     onDrawSizePreviewChange = { showPenSizePreview = it },
                 )
             }

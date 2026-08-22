@@ -51,6 +51,7 @@ data class EditorState(
     val penWidth: Float = 8f,
     val drawTool: DrawTool = DrawTool.Brush,
     val previousDrawTool: DrawTool? = null,
+    val eyedropperAutoSwitch: Boolean = true,
     val palette: List<Color> = emptyList(),
     val textEditorState: TextEditorState = TextEditorState(),
     val stickerPanelState: StickerPanelState = StickerPanelState(catalog = StickerAssets.all),

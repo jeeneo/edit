@@ -194,12 +194,12 @@ private fun FileNameField(
                                     if (timedOut) {
                                         if (isAdjustable && !canLossless) {
                                             longPressConsumed = true
-                                            HapticPatterns.longPress()
+                                            // HapticPatterns.longPress()
                                             visibleSlider = !visibleSlider
                                         } else if (canLossless) {
                                             longPressConsumed = true
                                             AppToasts.show("You don't need to set quality on lossless panel")
-                                            HapticPatterns.longPress()
+                                            // HapticPatterns.longPress()
                                         }
                                     }
 
@@ -217,7 +217,8 @@ private fun FileNameField(
                                 label = "chevronRotation"
                             )
                             IconButton(onClick = {
-                                HapticPatterns.tap(); formatMenuExpanded = true
+                                // HapticPatterns.tap()
+                                formatMenuExpanded = true
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.KeyboardArrowDown,
@@ -320,7 +321,7 @@ private fun OverwriteSplitButton(
                                 val next = cycleDeletionMode(deletionMode)
                                 onDeletionModeChange(next)
                                 AppToasts.show(next.toastMessage())
-                                HapticPatterns.longPress()
+//                                HapticPatterns.longPress()
 
                                 do {
                                     val event = awaitPointerEvent(pass = PointerEventPass.Initial)

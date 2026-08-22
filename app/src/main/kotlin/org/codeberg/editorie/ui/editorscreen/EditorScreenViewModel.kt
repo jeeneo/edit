@@ -64,6 +64,7 @@ class EditorScreenViewModel : ViewModel() {
             penColor = App.prefs.loadPenColor(),
             palette = App.prefs.loadPalette(),
             penWidth = App.prefs.loadPenWidth(),
+            eyedropperAutoSwitch = App.prefs.loadEyedropperAutoSwitch(),
             textEditorState = TextEditorState(color = App.prefs.loadTextColor()),
             stickerPanelState = StickerPanelState(
                 catalog = StickerAssets.all,
@@ -724,6 +725,11 @@ class EditorScreenViewModel : ViewModel() {
         }
     }
 
+    fun setEyedropperAutoSwitch(enabled: Boolean) {
+        App.prefs.saveEyedropperAutoSwitch(enabled)
+        update { copy(eyedropperAutoSwitch = enabled) }
+    }
+
     fun eyedropperPick(pixelPos: Offset, scaledDensity: Float, context: Context) {
         viewModelScope.launch {
             val sampled = withContext(Dispatchers.Default) {
@@ -737,15 +743,16 @@ class EditorScreenViewModel : ViewModel() {
                     context = context
                 )
             }
-            App.prefs.savePenColor(sampled)
-            update {
-                copy(
-                    penColor = sampled,
-                    drawTool = state.previousDrawTool ?: DrawTool.Brush,
-                    previousDrawTool = null,
-                    dropperPreview = null,
-                )
-            }
+        App.prefs.savePenColor(sampled)
+        val autoSwitch = state.eyedropperAutoSwitch
+        update {
+            copy(
+                penColor = sampled,
+                drawTool = if (autoSwitch) previousDrawTool ?: DrawTool.Brush else drawTool,
+                previousDrawTool = null,
+                dropperPreview = null,
+            )
+        }
         }
     }
 

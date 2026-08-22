@@ -116,6 +116,7 @@ fun BottomEditorBar(
     onModeChange: (EditorPanel, Long?) -> Unit,
     closeOnSave: Boolean,
     onToggleCloseOnSave: (Boolean) -> Unit,
+    onToggleEyedropperAutoSwitch: (Boolean) -> Unit,
     focusChanged: (Boolean) -> Unit = {},
     onDrawSizePreviewChange: (Boolean) -> Unit = {},
 ) {
@@ -220,6 +221,8 @@ fun BottomEditorBar(
                         hasStrokes = state.layers.any {
                             it is EditorLayer.Stroke || it is EditorLayer.EraseStroke
                         },
+                        eyedropperAutoSwitch = state.eyedropperAutoSwitch,
+                        onToggleEyedropperAutoSwitch = onToggleEyedropperAutoSwitch,
                         onSizePreviewChange = onDrawSizePreviewChange,
                     )
 
@@ -407,7 +410,7 @@ fun BottomEditorBar(
                     onLongClick = {
                         val next = !closeOnSave
                         onToggleCloseOnSave(next)
-                        HapticPatterns.longPress()
+                        // HapticPatterns.longPress()
                         AppToasts.show(if (next) "Close after save" else "Stay after save")
                     },
                 ) {

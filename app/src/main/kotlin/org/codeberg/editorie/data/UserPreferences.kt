@@ -26,6 +26,9 @@ class UserPreferences(private val context: Context) {
     }
 
     fun savePenColor(color: Color) = prefs().edit { putInt(KEY_PEN, color.toArgb()) }
+    fun loadEyedropperAutoSwitch(): Boolean = prefs().getBoolean(KEY_EYEDROPPER_AUTO_SWITCH, true)
+    fun saveEyedropperAutoSwitch(value: Boolean) =
+        prefs().edit { putBoolean(KEY_EYEDROPPER_AUTO_SWITCH, value) }
     fun loadPalette(): List<Color> {
         val p = prefs()
         val hasPalette = p.contains(KEY_PALETTE)
@@ -203,6 +206,7 @@ class UserPreferences(private val context: Context) {
         const val KEY_PEN = "pen_color"
         const val KEY_PALETTE = "custom_palette"
         const val KEY_PEN_WIDTH = "pen_width"
+        const val KEY_EYEDROPPER_AUTO_SWITCH = "eyedropper_auto_switch"
         const val KEY_DELETE_MODE = "delete_mode"
         const val KEY_CLOSE_ON_SAVE = "close_on_save"
         const val KEY_MAX_UNDO = "max_undo_levels"

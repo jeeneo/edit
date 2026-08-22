@@ -493,7 +493,7 @@ fun ColorPickerBar(
                 borderColor = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
                 onClick = { HapticPatterns.tap(); colorSelected(color) },
                 onLongPress = {
-                    HapticPatterns.longPress()
+                    // HapticPatterns.longPress()
                     editTarget.value = ColorTarget(color, paletteIndex = index)
                 },
             )

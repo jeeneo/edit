@@ -185,7 +185,7 @@ fun UndoIconButton(
                         }
                     },
                     onLongPress = {
-                        HapticPatterns.longPress()
+//                        HapticPatterns.longPress()
                         showDialog.value = true
                     },
                 )
@@ -350,7 +350,7 @@ private fun LayerMoveButton(
                 indication = null,
                 enabled = enabled,
                 onClick = { onClick(); HapticPatterns.tap() },
-                onLongClick = { onLongPress(); HapticPatterns.longPress() },
+                onLongClick = { onLongPress(); },
             ),
         contentAlignment = Alignment.Center,
     ) {
